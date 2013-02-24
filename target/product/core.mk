@@ -13,13 +13,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
 PRODUCT_BRAND := generic
 PRODUCT_DEVICE := generic
 PRODUCT_NAME := core
 
-PRODUCT_PACKAGES := \
+PRODUCT_PACKAGES += \
     ApplicationsProvider \
     BackupRestoreConfirmation \
+    BasicDreams \
     Browser \
     Contacts \
     ContactsProvider \
@@ -29,11 +31,13 @@ PRODUCT_PACKAGES := \
     KeyChain \
     MediaProvider \
     PackageInstaller \
+    PicoTts \
     SettingsProvider \
     SharedStorageBackup \
     TelephonyProvider \
     UserDictionaryProvider \
     VpnDialogs \
+    abcc \
     apache-xml \
     atrace \
     bouncycastle \
@@ -52,7 +56,6 @@ PRODUCT_PACKAGES := \
     drmserver \
     dx \
     ext \
-    framework2 \
     framework-res \
     hprof-conv \
     icu.dat \
@@ -68,6 +71,7 @@ PRODUCT_PACKAGES := \
     libOpenSLES \
     libaudiopreprocessing \
     libaudioutils \
+    libbcc \
     libcrypto \
     libdownmix \
     libdvm \
@@ -84,10 +88,13 @@ PRODUCT_PACKAGES := \
     libmdnssd \
     libnativehelper \
     libnfc_ndef \
+    libportable \
     libpowermanager \
     libspeexresampler \
     libsqlite_jni \
     libssl \
+    libstagefright \
+    libstagefright_chromium_http \
     libstagefright_soft_aacdec \
     libstagefright_soft_aacenc \
     libstagefright_soft_amrdec \
@@ -107,12 +114,18 @@ PRODUCT_PACKAGES := \
     libwebrtc_audio_preprocessing \
     libwilhelm \
     libz \
+    make_ext4fs \
     mdnsd \
     requestsync \
     screencap \
     sensorservice \
     lint \
-    uiautomator
+    uiautomator \
+    telephony-common \
+    mms-common \
+    zoneinfo.dat \
+    zoneinfo.idx \
+    zoneinfo.version
 
 PRODUCT_COPY_FILES += \
     system/core/rootdir/init.usb.rc:root/init.usb.rc \
@@ -131,5 +144,20 @@ ifeq ($(WITH_HOST_DALVIK),true)
         libjavacore \
         libssl \
         libz-host \
-        dalvik
+        dalvik \
+        zoneinfo-host.dat \
+        zoneinfo-host.idx \
+        zoneinfo-host.version
 endif
+
+ifeq ($(HAVE_SELINUX),true)
+    PRODUCT_PACKAGES += \
+        sepolicy \
+        file_contexts \
+        seapp_contexts \
+        property_contexts \
+        mac_permissions.xml
+endif
+
+$(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
+

@@ -1,8 +1,8 @@
 <?cs include:"doctype.cs" ?>
 <?cs include:"macros.cs" ?>
-<html>
+<html<?cs if:devsite ?> devsite<?cs /if ?>>
 <?cs include:"head_tag.cs" ?>
-<body class="gc-documentation 
+<body class="gc-documentation <?cs if:(reference.gms || reference.gcm) ?>google<?cs /if ?>
   <?cs if:(guide||develop||training||reference||tools||sdk) ?>develop<?cs
   elif:design ?>design<?cs
   elif:distribute ?>distribute<?cs
@@ -90,7 +90,11 @@ Summary:
 <?cs /if ?>
 </div><!-- end sum-details-links -->
 <div class="api-level">
-  <?cs call:since_tags(class) ?>
+  <?cs call:since_tags(class) ?><?cs
+  if:class.deprecatedsince
+    ?><br>Deprecated since <a href="<?cs var:toroot ?>guide/topics/manifest/uses-sdk-element.html#ApiLevels"
+        >API level <?cs var:class.deprecatedsince ?></a><?cs
+  /if ?>
   <?cs call:federated_refs(class) ?>
 </div>
 </div><!-- end api-info-block -->

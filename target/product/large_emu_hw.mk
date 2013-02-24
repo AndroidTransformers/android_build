@@ -24,14 +24,11 @@ PRODUCT_PACKAGES := \
     DeskClock \
     Bluetooth \
     Calculator \
-    Calendar \
     CertInstaller \
     DrmProvider \
-    Email \
-    Exchange \
+    Email2 \
+    Exchange2 \
     Gallery2 \
-    LatinIME \
-    Launcher2 \
     Music \
     Settings \
     Sync \
@@ -41,6 +38,7 @@ PRODUCT_PACKAGES := \
     bluetooth-health \
     hostapd \
     wpa_supplicant.conf
+
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core.mk)
 
